@@ -45,17 +45,17 @@ main {
   text-transform: uppercase;
 }
 
-#suggestion {
+#sgst {
   margin: 90px 2em 2em 2em;
 
 }
   
-#suggestion ul {
+#sgst ul {
   display: flex;
   flex-direction: row;
 }
 
-#suggestion ul li {
+#sgst ul li {
   display: flex;
   flex: 1;
   flex-flow: row;
@@ -65,7 +65,7 @@ main {
   letter-spacing: 0.2rem
 }
 
-#suggestion ul li a {
+#sgst ul li a {
   width: 80%;
   text-align: center; 
   color: #000000;
@@ -80,7 +80,7 @@ main {
 
 }
 
-#suggestion ul li:hover a {
+#sgst ul li:hover a {
   color: #000000;
   background: #ffff00;
 }

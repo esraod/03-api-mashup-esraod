@@ -21,8 +21,8 @@ class Mashed {
 
 
     /**
-     * Metod som sätter upp våra eventlyssnare
-     */
+    * Metod som sätter upp våra eventlyssnare
+    *  */
     addEventListeners() {
         // Eventlyssnare för sök-knappen
         this.searchBtn.addEventListener('click', event =>
@@ -33,6 +33,7 @@ class Mashed {
         * Eventlyssnare för alla ord i sgst
         * För mer information om forEach: https://mzl.la/IysHjg
         */
+
         this.sgstWords.forEach(wordEl =>
         wordEl.addEventListener('click', event =>
             this.search(event, event.target.textContent)
@@ -42,37 +43,39 @@ class Mashed {
 
 
     /**
-     * Metod (används som callback) för att hantera sökningar
-     *
-     * @param {*} event Det event som gjorde att denna callback anropades
-     * @param {*} [searchString=null] Den söksträng som användaren matat in i fältet, är null by default
-     */
+    * Metod (används som callback) för att hantera sökningar
+    *
+    * @param {*} event Det event som gjorde att denna callback anropades
+    * @param {*} [searchString=null] Den söksträng som användaren matat in i fältet, är null by default
+    */
     search(event, searchString = null) {
         event.preventDefault();
         // Om söksträngen inte är tom och är definierad så ska vi söka
         if (this.checkSearchInput(searchString)) {
-        console.log(`Trigga sökning med ${searchString}`);
-    });
+            console.log(`Trigga sökning med ${searchString}`);
+        }
 
-    // 1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
-    // Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
-    
-    // 2) Använd Promise.all för att hantera varje anrop (promise)
-    // 2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
 
-    // 3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
-    // 4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
-    // 5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
+        // 1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
+        // Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
+        // 2) Använd Promise.all för att hantera varje anrop (promise)
+        // 2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
 
-    // 2 b) catch() => Om något anrop misslyckas, visa felmeddelande
+        // 3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
+        // 4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
+        // 5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
 
-    } else {
-      console.log(
-        `Söksträngen är tom, visa ett meddelande eller bara returnera`
-      );
-      return;
+        // 2 b) catch() => Om något anrop misslyckas, visa felmeddelande
+
+
+        else {
+            console.log(
+            `Söksträngen är tom, visa ett meddelande eller bara returnera`
+            );
+            return;
+        }
     }
-  }
+
 
   /**
    * Metod som används för att kolla att söksträngen är giltig
@@ -84,6 +87,7 @@ class Mashed {
         return searchString && searchString.trim().length > 0;
     }
 
+
   /**
    *  Metod som används för att göra API-anrop till Flickr's API för att få bildresultat.
    *
@@ -91,7 +95,7 @@ class Mashed {
    * @param {*} searchString Söksträngen som matats in av användaren
    * @returns {Promise} Ett fetch() Promise
    */
-    fetchFlickrPhotos(searchString) {
+    fetchFlickrPhotos(searchString){
         let flickrAPIkey = `42e291bad00fd4332215d3336cc52534`; // Din API-nyckel här
         let flickerAPIRootURL = `https://api.flickr.com/services/rest/?`; // Grundläggande delen av Flickr's API URL
 
@@ -100,7 +104,7 @@ class Mashed {
         let flickrURL = `${flickerAPIRootURL}${flickrQueryParams}`;
 
         return fetch(flickrURL);
-    }
+    };
 
   /**
    * Metod som används för att göra API-anrop till wordlab API:et för att få förslag på andra söktermer

@@ -1,67 +1,70 @@
 class Mashed {
-  constructor() {
-    this.search = this.search.bind(this);
 
-    this.initialize();
-    this.addEventListeners();
-  }
+    constructor() {
+        this.search = this.search.bind(this);
+        this.initialize();
+        this.addEventListeners();
+    }
 
-  initialize() {
-    // Egenskaper för instanser av den här klassen, används för att referera till samma Node/Element i DOM.
-    this.sentinel = document.querySelector('.sentinel');
-    this.searchInput = document.querySelector('.search input');
-    this.searchBtn = document.querySelector('.search button');
-    this.sidebarWords = document.querySelectorAll('aside ul');
-    this.searchResultsContainer = document.querySelector('.results ul');
 
-    // Frivilligt: för att visa en laddningsindikator!
-    this.loadingIndicator = document.querySelector('.loader');
-  }
+    initialize() {
+        // Egenskaper för instanser av den här klassen, används för att referera till samma Node/Element i DOM.
+        this.sentinel = document.querySelector('.sentinel');
+        this.searchInput = document.querySelector('.search input');
+        this.searchBtn = document.querySelector('.search button');
+        this.sgstWords = document.querySelectorAll('div #sgst ul');
+        this.searchResultsContainer = document.querySelector('.results ul');
 
-  /**
-   * Metod som sätter upp våra eventlyssnare
-   */
-  addEventListeners() {
-    // Eventlyssnare för sök-knappen
-    this.searchBtn.addEventListener('click', event =>
-      this.search(event, this.searchInput.value)
-    );
+        // Frivilligt: för att visa en laddningsindikator!
+        this.loadingIndicator = document.querySelector('.loader');
+    }
 
-    /*
-    * Eventlyssnare för alla ord i sidomenyn
-    * För mer information om forEach: https://mzl.la/IysHjg
-    */
-    this.sidebarWords.forEach(wordEl =>
-      wordEl.addEventListener('click', event =>
-        this.search(event, event.target.textContent)
-      )
-    );
-  }
 
-  /**
-   * Metod (används som callback) för att hantera sökningar
-   *
-   * @param {*} event Det event som gjorde att denna callback anropades
-   * @param {*} [searchString=null] Den söksträng som användaren matat in i fältet, är null by default
-   */
-  search(event, searchString = null) {
-    event.preventDefault();
-    // Om söksträngen inte är tom och är definierad så ska vi söka
-    if (this.checkSearchInput(searchString)) {
-      console.log(`Trigga sökning med ${searchString}`);
+    /**
+     * Metod som sätter upp våra eventlyssnare
+     */
+    addEventListeners() {
+        // Eventlyssnare för sök-knappen
+        this.searchBtn.addEventListener('click', event =>
+        this.search(event, this.searchInput.value)
+        );
 
-      // 1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
-      // Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
+        /*
+        * Eventlyssnare för alla ord i sgst
+        * För mer information om forEach: https://mzl.la/IysHjg
+        */
+        this.sgstWords.forEach(wordEl =>
+        wordEl.addEventListener('click', event =>
+            this.search(event, event.target.textContent)
+        )
+        );
+    }
 
-      // 2) Använd Promise.all för att hantera varje anrop (promise)
 
-      // 2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
+    /**
+     * Metod (används som callback) för att hantera sökningar
+     *
+     * @param {*} event Det event som gjorde att denna callback anropades
+     * @param {*} [searchString=null] Den söksträng som användaren matat in i fältet, är null by default
+     */
+    search(event, searchString = null) {
+        event.preventDefault();
+        // Om söksträngen inte är tom och är definierad så ska vi söka
+        if (this.checkSearchInput(searchString)) {
+        console.log(`Trigga sökning med ${searchString}`);
+    });
 
-      // 3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
-      // 4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
-      // 5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
+    // 1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
+    // Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
+    
+    // 2) Använd Promise.all för att hantera varje anrop (promise)
+    // 2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
 
-      // 2 b) catch() => Om något anrop misslyckas, visa felmeddelande
+    // 3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
+    // 4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
+    // 5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
+
+    // 2 b) catch() => Om något anrop misslyckas, visa felmeddelande
 
     } else {
       console.log(
@@ -77,9 +80,9 @@ class Mashed {
    * @param {*} searchString Söksträngen som matats in av användaren
    * @returns Boolean (true/false)
    */
-  checkSearchInput(searchString) {
-    return searchString && searchString.trim().length > 0;
-  }
+    checkSearchInput(searchString) {
+        return searchString && searchString.trim().length > 0;
+    }
 
   /**
    *  Metod som används för att göra API-anrop till Flickr's API för att få bildresultat.
@@ -88,16 +91,16 @@ class Mashed {
    * @param {*} searchString Söksträngen som matats in av användaren
    * @returns {Promise} Ett fetch() Promise
    */
-  fetchFlickrPhotos(searchString) {
-    let flickrAPIkey = ``; // Din API-nyckel här
-    let flickerAPIRootURL = `https://api.flickr.com/services/rest/?`; // Grundläggande delen av Flickr's API URL
+    fetchFlickrPhotos(searchString) {
+        let flickrAPIkey = `42e291bad00fd4332215d3336cc52534`; // Din API-nyckel här
+        let flickerAPIRootURL = `https://api.flickr.com/services/rest/?`; // Grundläggande delen av Flickr's API URL
 
-    // Olika sökparametrar som behövs för Flickr's API. För mer info om detta kolla i Flickrs API-dokumentation
-    let flickrQueryParams = `&method=flickr.photos.search&api_key=${flickrAPIkey}&text=searchString&extras=url_q, url_o, url_m&format=json&tags=${searchString}&license=2,3,4,5,6,9&sort=relevance&parse_tags=1&nojsoncallback=1`;
-    let flickrURL = `${flickerAPIRootURL}${flickrQueryParams}`;
+        // Olika sökparametrar som behövs för Flickr's API. För mer info om detta kolla i Flickrs API-dokumentation
+        let flickrQueryParams = `&method=flickr.photos.search&api_key=${flickrAPIkey}&text=searchString&extras=url_q, url_o, url_m&format=json&tags=${searchString}&license=2,3,4,5,6,9&sort=relevance&parse_tags=1&nojsoncallback=1`;
+        let flickrURL = `${flickerAPIRootURL}${flickrQueryParams}`;
 
-    return fetch(flickrURL);
-  }
+        return fetch(flickrURL);
+    }
 
   /**
    * Metod som används för att göra API-anrop till wordlab API:et för att få förslag på andra söktermer
@@ -105,29 +108,30 @@ class Mashed {
    * @param {*} searchString Söksträngen som matats in av användaren
    * @returns {Promise} Ett fetch() Promise
    */
-  fetchWordlabWords(searchString) {
-    let wordLabAPIkey = ``; // Din API-nyckel här
-    let wordLabURL = `http://words.bighugelabs.com/api/2/${wordLabAPIkey}/${searchString}/json`;
+    fetchWordlabWords(searchString) {
+        let wordLabAPIkey = `31da8b2236a3ad990c9707422568cee5`; // Din API-nyckel här
+        let wordLabURL = `http://words.bighugelabs.com/api/2/${wordLabAPIkey}/${searchString}/json`;
 
-    return fetch(wordLabURL);
-  }
+        return fetch(wordLabURL);
+    }
 
-  /**
-   * Metod som skapar bild-element och relaterade element för varje sökresultat mot Flickr
-   *
-   * @param {Object} data Sökresultaten från Flickr's API.
-   */
-  renderFlickrResults(data) {}
+    /**
+     * Metod som skapar bild-element och relaterade element för varje sökresultat mot Flickr
+     *
+     * @param {Object} data Sökresultaten från Flickr's API.
+     */
+    renderFlickrResults(data) {}
 
-  /**
-   * Metod som skapar ord-element för relaterade sökord som kommer från Wordlabs API
-   *
-   * @param {Object} data Sökresultaten från Flickr's API.
-   */
-  renderWordlabResults(data) {}
+    /**
+     * Metod som skapar ord-element för relaterade sökord som kommer från Wordlabs API
+     *
+     * @param {Object} data Sökresultaten från Flickr's API.
+     */
+    renderWordlabResults(data) {}
 }
+
 
 // Immediately-Invoked Function Expression, detta betyder att när JS-filen läses in så körs koden inuti funktionen nedan.
 (function() {
-  new Mashed();
+    new Mashed();
 })();

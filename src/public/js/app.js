@@ -36,11 +36,23 @@ class Mashed {
 
         this.sgstWords.forEach(wordEl =>
         wordEl.addEventListener('click', event =>
-            this.search(event, event.target.textContent)
+        this.search(event, event.target.textContent)
         )
         );
     }
 
+        /*
+        1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
+        Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
+        2) Använd Promise.all för att hantera varje anrop (promise)
+        2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
+
+        3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
+        4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
+        5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
+
+        2 b) catch() => Om något anrop misslyckas, visa felmeddelande
+        */
 
     /**
     * Metod (används som callback) för att hantera sökningar
@@ -50,25 +62,44 @@ class Mashed {
     */
     search(event, searchString = null) {
         event.preventDefault();
+
         // Om söksträngen inte är tom och är definierad så ska vi söka
         if (this.checkSearchInput(searchString)) {
+
+            // Console loggar det vi sökt på som kommer trigga sökningen etc.
             console.log(`Trigga sökning med ${searchString}`);
-        }
 
 
-        // 1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
-        // Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
-        // 2) Använd Promise.all för att hantera varje anrop (promise)
-        // 2 a) then(results) => Om varje anrop lyckas och varje anrop returnerar data
-
-        // 3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
-        // 4 results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
-        // 5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
-
-        // 2 b) catch() => Om något anrop misslyckas, visa felmeddelande
+            // 1) Array med anrop(promise) till de två fetch'n 
+            const resultArray = [this.fetchFlickrPhotos(searchString),this.fetchWordlabWords(searchString)];
 
 
-        else {
+            // 2) Promise.all för att hantera anrop(promoise)
+            Promise.all(resultArray).then(results => {
+                this.fetchFlickrPhotos(results[0]);
+                this.fetchWordlabWords(results[1]);
+                console.log("working console in my Promise.all"); 
+                console.log(results);
+                return results;
+            });
+
+
+            //2a) then(resuluts) => om varje anrop lyckas och anropen retunerar data
+
+
+            //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
+
+            // 4) results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
+
+            // 5) skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
+
+            // 2b) catch() => Om något anrop misslyckas visa felmedelande
+
+       
+
+
+        } else {
+            // Om söksträngen iär tom och inte definierad
             console.log(
             `Söksträngen är tom, visa ett meddelande eller bara returnera`
             );
@@ -106,6 +137,7 @@ class Mashed {
         return fetch(flickrURL);
     };
 
+
   /**
    * Metod som används för att göra API-anrop till wordlab API:et för att få förslag på andra söktermer
    *
@@ -119,12 +151,14 @@ class Mashed {
         return fetch(wordLabURL);
     }
 
+
     /**
      * Metod som skapar bild-element och relaterade element för varje sökresultat mot Flickr
      *
      * @param {Object} data Sökresultaten från Flickr's API.
      */
     renderFlickrResults(data) {}
+
 
     /**
      * Metod som skapar ord-element för relaterade sökord som kommer från Wordlabs API

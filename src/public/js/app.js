@@ -2,6 +2,7 @@ class Mashed {
 
     constructor() {
         this.search = this.search.bind(this);
+
         this.initialize();
         this.addEventListeners();
     }
@@ -65,7 +66,6 @@ class Mashed {
 
         // Om söksträngen inte är tom och är definierad så ska vi söka
         if (this.checkSearchInput(searchString)) {
-
             // Console loggar det vi sökt på som kommer trigga sökningen etc.
             console.log(`Trigga sökning med ${searchString}`);
 
@@ -75,17 +75,15 @@ class Mashed {
 
 
             // 2) Promise.all för att hantera anrop(promoise)
-            Promise.all(resultArray).then(results => {
-                this.fetchFlickrPhotos(results[0]);
-                this.fetchWordlabWords(results[1]);
-                console.log("working console in my Promise.all"); 
-                console.log(results);
-                return results;
-            });
-
-
+            Promise.all(resultArray)
+            
             //2a) then(resuluts) => om varje anrop lyckas och anropen retunerar data
-
+            .then(results => {
+                this.renderFlickrPhotos(results[0]);
+                this.renderWordlabWords(results[1]);
+                //console.log("working console in my Promise.all"); 
+                //console.log(results);
+            });
 
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
 
@@ -94,6 +92,9 @@ class Mashed {
             // 5) skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
 
             // 2b) catch() => Om något anrop misslyckas visa felmedelande
+            .catch(() => {
+
+            });
 
        
 

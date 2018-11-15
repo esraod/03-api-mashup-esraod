@@ -196,8 +196,8 @@ main {
 
 .results .result:hover {
   cursor: pointer;
-  background-color: #ffff00;
-  color: #000000;
+  /*background-color: #ffff00;*/
+   text-align: right;
 }
 
 

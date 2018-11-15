@@ -82,12 +82,18 @@ class Mashed {
                 //console.log(results);
                 //console.log(results[1])
                 //console.log(results[1].json())
-                return Promise.all([results[0].json(), results[1].json()]); 
+                //return Promise.all([results[0].json(), results[1].json()]); 
+                if (results[0].status === 200 && results[1].status === 200) {
+                    return Promise.all([results[0].json(), results[1].json()]);;
+                } else if (results[0].status === 200) {
+                    return Promise.all([results[0].json()]);
+                }
             })
 
             .then(data =>{ 
                this.renderFlickrResults(data[0]);
                this.renderWordlabResults(data[1]);
+               
 
             })
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
@@ -168,6 +174,7 @@ class Mashed {
     this.searchResultsContainer.innerHTML ="";
     for (let i = 0; i < 15; i++){
         this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg">`)
+    
     }; 
     }
     
@@ -188,10 +195,12 @@ class Mashed {
        
                 document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
             }
+           
             
             //this.sgstWords.insertAdjacentHTML =('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`)
             //document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
-    }; 
+        }; 
+       
     }
 
 }

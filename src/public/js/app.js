@@ -79,12 +79,18 @@ class Mashed {
             
             //2a) then(resuluts) => om varje anrop lyckas och anropen retunerar data
             .then(results => {
-                this.renderFlickrPhotos(results[0]);
-                this.renderWordlabWords(results[1]);
+                //this.fetchFlickrPhotos(results[0]);
+                //this.fetchWordlabWords(results[1]);
                 //console.log("working console in my Promise.all"); 
                 //console.log(results);
-            });
+                //console.log(results[1])
+                //console.log(results[1].json())
+                return Promise.all([results[0].json(), results[1].json()]); 
+            })
 
+            .then(data =>{ 
+               console.log(data);
+            })
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
 
             // 4) results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
@@ -95,6 +101,7 @@ class Mashed {
             .catch(() => {
 
             });
+        
 
        
 
@@ -158,7 +165,9 @@ class Mashed {
      *
      * @param {Object} data Sökresultaten från Flickr's API.
      */
-    renderFlickrResults(data) {}
+    renderFlickrResults(data) {
+    }
+    
 
 
     /**
@@ -166,8 +175,11 @@ class Mashed {
      *
      * @param {Object} data Sökresultaten från Flickr's API.
      */
-    renderWordlabResults(data) {}
+    renderWordlabResults(data) {
+    }
+
 }
+   
 
 
 // Immediately-Invoked Function Expression, detta betyder att när JS-filen läses in så körs koden inuti funktionen nedan.

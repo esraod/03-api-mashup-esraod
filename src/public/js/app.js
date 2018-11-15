@@ -182,11 +182,16 @@ class Mashed {
         //this.sgstWords.innerHTML="";
         document.querySelector("div#sgst ul").innerText="";
         console.log(data);
-        for (let i = 0; i < 5; i++){
+        
+        for (let i = 0; i < 3; i++){
+            if (data.noun.syn[i].length > 0){
+       
+                document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
+            }
+            
             //this.sgstWords.insertAdjacentHTML =('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`)
-            document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
+            //document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
     }; 
-
     }
 
 }

@@ -169,6 +169,7 @@ main {
 .results ul {
   flex-wrap: wrap;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .results .result {

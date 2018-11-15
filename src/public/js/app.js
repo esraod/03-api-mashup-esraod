@@ -87,6 +87,8 @@ class Mashed {
 
             .then(data =>{ 
                this.renderFlickrResults(data[0]);
+               this.renderWordlabResults(data[1]);
+
             })
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
 
@@ -165,7 +167,7 @@ class Mashed {
     renderFlickrResults(data) { 
     this.searchResultsContainer.innerHTML ="";
     for (let i = 0; i < 15; i++){
-        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_b.jpg">`)
+        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg">`)
     }; 
     }
     
@@ -177,6 +179,12 @@ class Mashed {
      * @param {Object} data Sökresultaten från Flickr's API.
      */
     renderWordlabResults(data) {
+        this.sgstWords.innerHTML="";
+        console.log(data);
+        for (let i = 0; i < 3; i++){
+            this.sgstWords.insertAdjacentHTML =('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`)
+    }; 
+
     }
 
 }

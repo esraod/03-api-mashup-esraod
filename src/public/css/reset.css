@@ -79,7 +79,8 @@ ul {
   list-style: none; }
   nav ol, nav
   ul {
-    list-style-image: none; }
+    list-style-image: none;
+    justify-content: center; }
 
 li {
   list-style: none; }
@@ -103,7 +104,9 @@ img {
 img,
 svg {
   display: block;
-  vertical-align: middle; }
+  vertical-align: middle;
+  margin: 15px;
+} }
 
 figure {
   margin: 0; }

@@ -13,7 +13,7 @@ class Mashed {
         this.sentinel = document.querySelector('.sentinel');
         this.searchInput = document.querySelector('.search input');
         this.searchBtn = document.querySelector('.search button');
-        this.sgstWords = document.querySelectorAll('div #sgst ul');
+        this.sgstWords = document.querySelectorAll('div#sgst ul');
         this.searchResultsContainer = document.querySelector('.results ul');
 
         // Frivilligt: för att visa en laddningsindikator!
@@ -179,10 +179,12 @@ class Mashed {
      * @param {Object} data Sökresultaten från Flickr's API.
      */
     renderWordlabResults(data) {
-        this.sgstWords.innerHTML="";
+        //this.sgstWords.innerHTML="";
+        document.querySelector("div#sgst ul").innerText="";
         console.log(data);
-        for (let i = 0; i < 3; i++){
-            this.sgstWords.insertAdjacentHTML =('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`)
+        for (let i = 0; i < 5; i++){
+            //this.sgstWords.insertAdjacentHTML =('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`)
+            document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
     }; 
 
     }

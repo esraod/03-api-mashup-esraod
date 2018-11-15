@@ -21,20 +21,16 @@ class Mashed {
     }
 
 
-    /**
-    * Metod som sätter upp våra eventlyssnare
-    *  */
+    //Method that sets up our eventlisteners
     addEventListeners() {
-        // Eventlyssnare för sök-knappen
+        // Event listener to the search button
         this.searchBtn.addEventListener('click', event =>
         this.search(event, this.searchInput.value)
         );
 
-        /*
-        * Eventlyssnare för alla ord i sgst
-        * För mer information om forEach: https://mzl.la/IysHjg
-        */
+        
 
+        //Eventlistener for all words in sgst
         this.sgstWords.forEach(wordEl =>
         wordEl.addEventListener('click', event =>
         this.search(event, event.target.textContent)
@@ -42,7 +38,8 @@ class Mashed {
         );
     }
 
-        /*
+    
+    /*
         1) Bygg upp en array med anrop (promise) till fetchFlickrPhotos och fetchWordlabWords med searchString
         Notera: att ordningen du skickar in dessa i spelar roll i steg 3)
         2) Använd Promise.all för att hantera varje anrop (promise)
@@ -53,10 +50,10 @@ class Mashed {
         5 skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
 
         2 b) catch() => Om något anrop misslyckas, visa felmeddelande
-        */
+    */
 
     /**
-    * Metod (används som callback) för att hantera sökningar
+    * Method (used as a callback) to handle searches
     *
     * @param {*} event Det event som gjorde att denna callback anropades
     * @param {*} [searchString=null] Den söksträng som användaren matat in i fältet, är null by default
@@ -89,7 +86,7 @@ class Mashed {
             })
 
             .then(data =>{ 
-               console.log(data);
+               this.renderFlickrResults(data[0]);
             })
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
 
@@ -165,7 +162,11 @@ class Mashed {
      *
      * @param {Object} data Sökresultaten från Flickr's API.
      */
-    renderFlickrResults(data) {
+    renderFlickrResults(data) { 
+    this.searchResultsContainer.innerHTML ="";
+    for (let i = 0; i < 15; i++){
+        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_b.jpg">`)
+    }; 
     }
     
 

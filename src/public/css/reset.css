@@ -239,3 +239,9 @@ table {
 td,
 th {
   padding: 0; }
+
+footer{
+    text-align: center;
+    font-family: "raleway", sans-serif;
+    margin: 20px;
+}

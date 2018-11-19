@@ -104,6 +104,9 @@ class Mashed {
 
             // 2b) catch() => Om något anrop misslyckas visa felmedelande
             .catch(() => {
+                //alert("nothing matched");
+                this.searchResultsContainer.innerHTML ="";
+                this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search something else</span></p></li>');
 
             });
         

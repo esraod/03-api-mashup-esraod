@@ -204,9 +204,9 @@ overflow: inherit;
 
   
  flex-flow: column wrap;
- -webkit-columns: 100px 3; /* Chrome, Safari, Opera */
- -moz-columns: 100px 3; /* Firefox */
- columns: 100px 3;
+ -webkit-columns: 100px 4; /* Chrome, Safari, Opera */
+ -moz-columns: 100px 4; /* Firefox */
+ columns: 100px 4;
  max-height: 1700px;
 
 

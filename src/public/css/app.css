@@ -226,6 +226,7 @@ img:hover{
 .result img{
   width: 40vw;
   filter: none;
+  height: auto;
 
 }
 

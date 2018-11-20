@@ -28,8 +28,6 @@ class Mashed {
         this.search(event, this.searchInput.value)
         );
 
-        
-
         //Eventlistener for all words in sgst
         this.sgstWords.forEach(wordEl =>
         wordEl.addEventListener('click', event =>
@@ -80,6 +78,7 @@ class Mashed {
                 //this.fetchWordlabWords(results[1]);
                 //console.log("working console in my Promise.all"); 
                 //console.log(results);
+                console.log(results[1].status)
                 //console.log(results[1])
                 //console.log(results[1].json())
                 //return Promise.all([results[0].json(), results[1].json()]); 
@@ -87,16 +86,19 @@ class Mashed {
                     return Promise.all([results[0].json(), results[1].json()]);;
                 } else if (results[0].status === 200) {
                     return Promise.all([results[0].json()]);
-                }
+                } 
             })
 
             .then(data =>{ 
                this.renderFlickrResults(data[0]);
-               this.renderWordlabResults(data[1]);
+               document.querySelector("div#sgst ul").innerText="";
+               //this.renderWordlabResults(data[1]);
+                if (data[1]){
+                    this.renderWordlabResults(data[1]);
+                }
                console.log(data[0]);
-               
-
             })
+
             //  3) För varje resultat i arryen results, visa bilder från FlickR or ord från WordLab.
 
             // 4) results[0] kommer nu innehålla resultat från FlickR och results[1] resultat från WordLab.
@@ -104,16 +106,29 @@ class Mashed {
             // 5) skapa element och visa dem i DOM:en med metoderna (renderFlickResults och renderWordlabResults)
 
             // 2b) catch() => Om något anrop misslyckas visa felmedelande
-            .catch(() => {
+
+
+            .catch( err => {
                 //alert("nothing matched");
                 this.searchResultsContainer.innerHTML ="";
                 this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search something else</span></p></li>');
                 this.searchInput.value="";
+                document.querySelector("div#sgst ul").innerHTML="";
+                
             });
+           /* .catch(() => {
+
+                //alert("nothing matched");
+                
+                //this.searchResultsContainer.innerHTML ="";
+                //this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search something else</span></p></li>');
+                //this.searchInput.value="";
+                
+                
+            
+            });
+            */
         
-
-       
-
 
         } else {
             // Om söksträngen iär tom och inte definierad
@@ -175,11 +190,11 @@ class Mashed {
      * @param {Object} data Sökresultaten från Flickr's API.
      */
     renderFlickrResults(data) { 
-    this.searchResultsContainer.innerHTML ="";
-    for (let i = 0; i < 15; i++){
-        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg"></a>`)
-    
-    }; 
+        this.searchResultsContainer.innerHTML ="";
+        for (let i = 0; i < 15; i++){
+            this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg"></a>`)
+        }; 
+        
     }
     
 
@@ -195,8 +210,7 @@ class Mashed {
         console.log(data);
         
         for (let i = 0; i < 3; i++){
-            if (data.noun.syn[i].length > 0){
-       
+            if (data.noun.syn[i].length > 0){   
                 document.querySelector("div#sgst ul").insertAdjacentHTML('afterbegin', `<li><a href="#">${data.noun.syn[i]}</a></li>`);
             }
            

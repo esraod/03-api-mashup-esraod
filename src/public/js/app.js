@@ -93,6 +93,7 @@ class Mashed {
             .then(data =>{ 
                this.renderFlickrResults(data[0]);
                this.renderWordlabResults(data[1]);
+               console.log(data[0]);
                
 
             })
@@ -176,7 +177,7 @@ class Mashed {
     renderFlickrResults(data) { 
     this.searchResultsContainer.innerHTML ="";
     for (let i = 0; i < 15; i++){
-        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg">`)
+        this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg"></a>`)
     
     }; 
     }

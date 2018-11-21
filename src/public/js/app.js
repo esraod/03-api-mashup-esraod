@@ -110,8 +110,10 @@ class Mashed {
 
             .catch( err => {
                 //alert("nothing matched");
+                document.querySelector("div#sgst ul").innerText="";
+                
                 this.searchResultsContainer.innerHTML ="";
-                this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search something else</span></p></li>');
+                this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search for something else</span></p></li>');
                 this.searchInput.value="";
                
                 

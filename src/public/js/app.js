@@ -111,7 +111,7 @@ class Mashed {
             .catch( err => {
                 //alert("nothing matched");
                 document.querySelector("div#sgst ul").innerText="";
-                
+                document.querySelector(".results ul").setAttribute('style', "column-count: 1;")
                 this.searchResultsContainer.innerHTML ="";
                 this.searchResultsContainer.insertAdjacentHTML('afterbegin','<li class="result"> <p>Noting matched your search,</br> <span id="yellowtag">try search for something else</span></p></li>');
                 this.searchInput.value="";
@@ -193,6 +193,7 @@ class Mashed {
      */
     renderFlickrResults(data) { 
         this.searchResultsContainer.innerHTML ="";
+        document.querySelector(".results ul").setAttribute('style', "");
         for (let i = 0; i < 15; i++){
             this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg"></a>`)
         }; 

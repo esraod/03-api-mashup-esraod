@@ -18,8 +18,6 @@
 - **API**
   - [Flickr Servives API](https://www.flickr.com/services/api/)  →  (Photos)
   - [Big Huge Thesaurus](https://words.bighugelabs.com/api.php)  →  (Synonyms)
-</br>
-
 - **JavaScript** 
 - HTML
 - CSS

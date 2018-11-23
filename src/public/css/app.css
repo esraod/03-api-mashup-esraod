@@ -181,7 +181,7 @@ main {
   width: 80px;
   height: 80px;
   border: 16px solid #fff;
-  border-top: 16px solid #4fbf4f;
+  border-top: 16px solid #ffff00;
   border-radius: 50%;
 }
 
@@ -210,10 +210,10 @@ main {
 }
 
 @media only screen and (max-width : 1300px ){
-.results ul{
+  .results ul{
   -webkit-column-count:  3;
   column-count:  3;
-}
+  }
 }
 
 @media only screen and (max-width : 1000px ){
@@ -260,7 +260,7 @@ main {
 .results .result:hover {
   cursor: pointer;
   /*background-color: #ffff00;*/
-   text-align: right;
+  text-align: right;
 }
 
 img{

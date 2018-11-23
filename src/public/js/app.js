@@ -195,7 +195,7 @@ class Mashed {
         this.searchResultsContainer.innerHTML ="";
         document.querySelector(".results ul").setAttribute('style', "");
         for (let i = 0; i < 15; i++){
-            this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_m.jpg"></a>`)
+            this.searchResultsContainer.insertAdjacentHTML('afterbegin', `<a href="https://www.flickr.com/photos/${data.photos.photo[i].owner}/${data.photos.photo[i].id}/" target="_blank"><img src="https://farm${data.photos.photo[i].farm}.staticflickr.com/${data.photos.photo[i].server}/${data.photos.photo[i].id}_${data.photos.photo[i].secret}_c.jpg"></a>`)
         }; 
         
     }

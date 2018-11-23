@@ -264,7 +264,7 @@ main {
 }
 
 img{
-  filter:  opacity(80%)saturate(15%) ;
+  filter:  opacity(80%)saturate(25%) ;
 }
 
 img:hover{

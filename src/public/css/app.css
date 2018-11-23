@@ -204,9 +204,30 @@ main {
   -webkit-columns: 100px 4; /* Chrome, Safari, Opera */
   -moz-columns: 100px 4; /* Firefox */
   columns: 100px 4;
-  max-height: 1700px;
+  max-height: 3500px;
   column-gap: 30px; 
   column-fill: balance;
+}
+
+@media only screen and (max-width : 1300px ){
+.results ul{
+  -webkit-column-count:  3;
+  column-count:  3;
+}
+}
+
+@media only screen and (max-width : 1000px ){
+  .results ul{
+    -webkit-column-count:  2;
+    column-count:  2;
+  }
+}
+
+@media only screen and (max-width : 650px ){
+  .results ul{
+    -webkit-column-count:  1;
+    column-count:  1;
+  }
 }
 
 .results .result {

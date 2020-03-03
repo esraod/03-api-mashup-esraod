@@ -4,9 +4,6 @@
 
 </br>
 
-**[Project URL]** (http://esraoktav.chas.academy/u03/)
-
-**[Link to project]** - ([Project](http://esraoktav.chas.academy/u03/))
 
 ---------------------------------
 
@@ -51,9 +48,7 @@
 </br>
 
 ## Where to see it/Use it?/RESULT 
-- [Link](http://esraoktav.chas.academy/u03/)
-
-- Project URL (http://esraoktav.chas.academy/u03/)
+clone/download the project navigate into **/src/public/index.html** open up the **index.html** file on your browser.
 
 </br>
 
@@ -62,7 +57,7 @@
 
 - github/
 [esraod](https://www.github.com/esraod) :octocat:
-- [Other Projects](http://esraoktav.chas.academy/)
+
 
 
 -------------------------------------------------------
